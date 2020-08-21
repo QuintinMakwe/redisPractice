@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .del:checked + span{
+        color: red;
+    }
+
+    .task-list{
+        list-style: none;
+    }
+</style>
+<body>
+    <form method = 'post' action="/task/add">
+        <label>Add task</label>
+        <input type="text" name="task" placeholder="add task">
+        <input type="submit" value="Submit">
+    </form> 
+    <form method="post" action="/task/delete">
+        <ul class = "task-list">
+            <% title.forEach(task => { %>
+                <li>
+                    <label>
+                        <input type="checkbox" name="tasks" class="del" value="<%= task %>" /><span><%= task %></span>
+                    </label>
+                </li>
+            <% }) %>
+        </ul>   
+        <input type="submit" value="Remove">     
+    </form>
+    <% if(call) {%>
+        <h3>Next business call</h3>
+        Name: <%= call.name %>
+        Company: <%= call.company %>
+        phone: <%= call.phone %>
+        time: <%= call.time %>
+        <h3>Edit Next call</h3>
+    <% } %>
+    <form action="/call/add" method="post">
+        <label>Contact name</label><br>
+        <input type="text" name="name" placeholder="task name">
+        <br><br>
+        <label>Company</label>
+        <input type="text" name="company" placeholder="company">
+        <br><br>
+        <label>Phone</label>
+        <input type="number" name="phone" placeholder="phone">
+        <br><br>
+        <label>Day and Time</label> 
+        <input type="text" name="time" placeholder="time">
+        <br><br>
+        <input type="submit" value="submit">
+
+    </form>
+
+</body>
+</html>
